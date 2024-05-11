@@ -1,7 +1,4 @@
 # ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
 - main
@@ -32,3 +29,17 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure para Estudantes Starter (fd82f79a-ef95-4dc8-9e03-de205d2efffc)'
+    appType: 'webAppLinux'
+    WebAppName: 'Auroque'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'appsvc_linux_centralus'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
