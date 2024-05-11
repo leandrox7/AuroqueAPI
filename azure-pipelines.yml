@@ -37,7 +37,7 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Azure para Estudantes Starter (fd82f79a-ef95-4dc8-9e03-de205d2efffc)'
     appType: 'webAppLinux'
-    WebAppName: 'WebAuroque'
+    WebAppName: 'AuroqueAPI'
     deployToSlotOrASE: true
     ResourceGroupName: 'appsvc_linux_centralus'
     SlotName: 'production'
