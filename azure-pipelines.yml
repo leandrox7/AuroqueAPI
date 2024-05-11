@@ -1,5 +1,3 @@
-# ASP.NET Core (.NET Framework)
-
 trigger:
 - main
 
@@ -13,10 +11,12 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: 'Install NuGet'
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+  displayName: 'Restore NuGet Packages'
 
 - task: VSBuild@1
   inputs:
@@ -24,11 +24,13 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+  displayName: 'Build Solution'
 
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+  displayName: 'Run Unit Tests'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -39,7 +41,9 @@ steps:
     deployToSlotOrASE: true
     ResourceGroupName: 'appsvc_linux_centralus'
     SlotName: 'production'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+    package: '$(build.artifactStagingDirectory)/**/*.zip'
+  displayName: 'Deploy to Azure Web App'
+
+# Note on Changes
+# 1. Updated task input for package deployment to 'package' from 'packageForLinux'.
+# 2. Added 'displayName' to each task for better readability and management in logs.
