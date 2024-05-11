@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/fd82f79a-ef95-4dc8-9e03-de205d2efffc/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/AuroqueAPI",
+    "appService.deploySubpath": "."
+}
