@@ -1,0 +1,15 @@
+Y:\ChipBov\Adapters\obj\Debug\net6.0\Infra.DataBase.csproj.AssemblyReference.cache
+Y:\ChipBov\Adapters\obj\Debug\net6.0\Infra.DataBase.GeneratedMSBuildEditorConfig.editorconfig
+Y:\ChipBov\Adapters\obj\Debug\net6.0\Infra.DataBase.AssemblyInfoInputs.cache
+Y:\ChipBov\Adapters\obj\Debug\net6.0\Infra.DataBase.AssemblyInfo.cs
+Y:\ChipBov\Adapters\obj\Debug\net6.0\Infra.DataBase.csproj.CoreCompileInputs.cache
+Y:\ChipBov\Adapters\bin\Debug\net6.0\Infra.DataBase.deps.json
+Y:\ChipBov\Adapters\bin\Debug\net6.0\Infra.DataBase.dll
+Y:\ChipBov\Adapters\bin\Debug\net6.0\Infra.DataBase.pdb
+Y:\ChipBov\Adapters\bin\Debug\net6.0\Domain.dll
+Y:\ChipBov\Adapters\bin\Debug\net6.0\Domain.pdb
+Y:\ChipBov\Adapters\obj\Debug\net6.0\Infra.Da.084E24E4.Up2Date
+Y:\ChipBov\Adapters\obj\Debug\net6.0\Infra.DataBase.dll
+Y:\ChipBov\Adapters\obj\Debug\net6.0\refint\Infra.DataBase.dll
+Y:\ChipBov\Adapters\obj\Debug\net6.0\Infra.DataBase.pdb
+Y:\ChipBov\Adapters\obj\Debug\net6.0\ref\Infra.DataBase.dll

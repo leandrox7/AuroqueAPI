@@ -1,0 +1,14 @@
+Y:\ChipBov\Domain\bin\Debug\net6.0\Domain.deps.json
+Y:\ChipBov\Domain\bin\Debug\net6.0\Domain.runtimeconfig.json
+Y:\ChipBov\Domain\bin\Debug\net6.0\Domain.dll
+Y:\ChipBov\Domain\bin\Debug\net6.0\Domain.pdb
+Y:\ChipBov\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+Y:\ChipBov\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+Y:\ChipBov\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+Y:\ChipBov\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+Y:\ChipBov\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+Y:\ChipBov\Domain\obj\Debug\net6.0\Domain.dll
+Y:\ChipBov\Domain\obj\Debug\net6.0\refint\Domain.dll
+Y:\ChipBov\Domain\obj\Debug\net6.0\Domain.pdb
+Y:\ChipBov\Domain\obj\Debug\net6.0\Domain.genruntimeconfig.cache
+Y:\ChipBov\Domain\obj\Debug\net6.0\ref\Domain.dll
