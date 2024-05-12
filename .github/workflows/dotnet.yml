@@ -28,7 +28,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: /AuroqueWebApi
-        file: /AuroqueWebApi/Dockerfile
+        file: /Dockerfile
         push: true
         tags: leandrox7/auroque2024:latest 
         # Add build arguments if necessary, for example:
