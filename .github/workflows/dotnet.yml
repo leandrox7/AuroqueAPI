@@ -22,7 +22,7 @@ jobs:
       run: dotnet restore ChipBov.sln
 
     - name: Build
-      run: dotnet restore ChipBov.sln --no-restore
+      run: dotnet restore ChipBov.sln 
 
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v3
