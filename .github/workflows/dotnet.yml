@@ -19,10 +19,10 @@ jobs:
         dotnet-version: '6.0.x'  # Assuming .NET 6.0, update this according to your project's target version
 
     - name: Restore dependencies
-      run: dotnet restore /AuroqueWebApi/AuroqueWebApi.csproj
+      run: dotnet restore '**/*.csproj'
 
     - name: Build
-      run: dotnet build /AuroqueWebApi/AuroqueWebApi.csproj --no-restore
+      run: dotnet build '**/*.csproj' --no-restore
 
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v3
