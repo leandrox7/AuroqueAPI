@@ -1,0 +1,39 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '6.0.x'  # Assuming .NET 6.0, update this according to your project's target version
+
+    - name: Restore dependencies
+      run: dotnet restore /AuroqueWebApi/AuroqueWebApi.csproj
+
+    - name: Build
+      run: dotnet build /AuroqueWebApi/AuroqueWebApi.csproj --no-restore
+
+    - name: Build and Push Docker Image
+      uses: docker/build-push-action@v3
+      with:
+        context: /AuroqueWebApi
+        file: /AuroqueWebApi/Dockerfile
+        push: true
+        tags: leandrox7/auroque2024:latest 
+        # Add build arguments if necessary, for example:
+        # build-args: |
+        #   SOME_ENV=somevalue
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}  # Configure this in your GitHub repository secrets
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  # Configure this in your GitHub repository secrets
