@@ -1,49 +1,67 @@
 trigger:
-- main
+  branches:
+    include:
+      - main
 
-pool:
-  vmImage: 'windows-latest'
+jobs:
+- job: Build
+  displayName: 'Build and Publish'
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - task: UseDotNet@2
+    displayName: 'Install .NET Core SDK'
+    inputs:
+      version: '6.x'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore Dependencies'
+    inputs:
+      command: 'restore'
+      projects: '**/*.csproj'
 
-steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Install NuGet'
+  - task: DotNetCoreCLI@2
+    displayName: 'Build Project'
+    inputs:
+      command: 'build'
+      projects: '**/*.csproj'
+      arguments: '--configuration Release'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
-  displayName: 'Restore NuGet Packages'
+  - task: DotNetCoreCLI@2
+    displayName: 'Publish Project'
+    inputs:
+      command: 'publish'
+      projects: '**/*.csproj'
+      publishWebProjects: true
+      arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+      zipAfterPublish: true
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-  displayName: 'Build Solution'
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Artifact'
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'publishedApp'
+      publishLocation: 'pipeline'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-  displayName: 'Run Unit Tests'
-
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'Azure para Estudantes Starter (fd82f79a-ef95-4dc8-9e03-de205d2efffc)'
-    appType: 'webAppLinux'
-    WebAppName: 'AuroqueWebApi20240511204953'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'appsvc_windows_centralus'
-    SlotName: 'production'
-    package: '$(build.artifactStagingDirectory)/**/*.zip'
+- job: Deploy
   displayName: 'Deploy to Azure Web App'
+  dependsOn: Build
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - download: current
+    artifact: 'publishedApp'
 
-# Note on Changes
-# 1. Updated task input for package deployment to 'package' from 'packageForLinux'.
-# 2. Added 'displayName' to each task for better readability and management in logs.
+  - task: UseDotNet@2
+    displayName: 'Install .NET Core SDK'
+    inputs:
+      version: '6.x'
+
+  - task: AzureWebApp@1
+    displayName: 'Azure Web App Deploy'
+    inputs:
+      azureSubscription: 'Azure para Estudantes Starter (fd82f79a-ef95-4dc8-9e03-de205d2efffc)'
+      appType: 'webApp'
+      appName: 'AuroqueWebApi20240511204953'
+      package: '$(Agent.BuildDirectory)/**/*.zip'
+      deploymentMethod: 'auto'
