@@ -27,8 +27,8 @@ jobs:
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v3
       with:
-        context: /
-        file: Dockerfile
+        context: .  # Changed from '/' to '.' to refer to the GitHub workspace root
+        file: ./Dockerfile  # Ensure this path correctly points to your Dockerfile
         push: true
         tags: leandrox7/auroque2024:latest 
         # Add build arguments if necessary, for example:
