@@ -7,14 +7,14 @@ EXPOSE 443
 # Use SDK image to build the application.
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["AuroqueWebApi.csproj", "./"]
-RUN dotnet restore "YourProject.csproj"
+COPY ["AuroqueWebApi/AuroqueWebApi.csproj", "./"]
+RUN dotnet restore "AuroqueWebApi.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "AuroqueWebApi.csproj" -c Release -o /app/build
+RUN dotnet build "AuroqueWebApi/AuroqueWebApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "AuroqueWebApi.csproj" -c Release -o /app/publish
+RUN dotnet publish "AuroqueWebApi/AuroqueWebApi.csproj" -c Release -o /app/publish
 
 # Final stage/image.
 FROM base AS final
